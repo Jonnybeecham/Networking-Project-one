@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import javax.swing.JFrame;
+import java.awt.*;
 
 public class GUIBox extends javax.swing.JFrame {
     
@@ -37,9 +38,9 @@ public class GUIBox extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Message:");
+        jLabel1.setText("Message to be sent:");
 
-        jLabel2.setText("Send to:");
+        jLabel2.setText("Send to IP:");
 
         jButton1.setText("Send");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -48,20 +49,22 @@ public class GUIBox extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setText("Incoming Message: ");
+        jLabel3.setText("Message received: ");
 
         messageTextBox.setColumns(20);
         messageTextBox.setRows(5);
         jScrollPane1.setViewportView(messageTextBox);
-
         incomingTextBox.setColumns(20);
         incomingTextBox.setRows(5);
         jScrollPane2.setViewportView(incomingTextBox);
-
-        jLabel4.setText("Sent from:");
+		//
+		getContentPane().setBackground(Color.GREEN);
+		
+        jLabel4.setText("Sent from IP:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
+		//HORIZONTAL
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -77,19 +80,22 @@ public class GUIBox extends javax.swing.JFrame {
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(IPAddressBox, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+							//
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)) //changes panel
                         .addComponent(jScrollPane1)
                         .addComponent(jScrollPane2))
                     .addComponent(senderTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(150, Short.MAX_VALUE)) //right edge
         );
+		//VERTICAL
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(16, 16, 16)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+						//
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE) //SendBox
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(IPAddressBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -100,7 +106,8 @@ public class GUIBox extends javax.swing.JFrame {
                         .addComponent(jLabel1)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+				//
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE) //ReceiveBox
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(59, 59, 59)))
@@ -115,7 +122,7 @@ public class GUIBox extends javax.swing.JFrame {
     }
 
     //when the send button is clicked, create sender and receiver threads
-    //and sends or recevies s a message
+    //and sends or receives a message
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         
         //create a sender and receiver object
@@ -203,6 +210,8 @@ public class GUIBox extends javax.swing.JFrame {
         //without having to first send a message
         UDPReceiver receiver = new UDPReceiver();
         receiver.start();
+		
+		
 		
     }
 

@@ -34,6 +34,7 @@ public class UDPReceiver extends Thread {
 		System.out.println ("Packet received at " + new Date( ));
 		// Display packet information
 		InetAddress remote_addr = packet.getAddress();
+		sender = remote_addr.getHostAddress();
 		System.out.println ("Sender: " + remote_addr.getHostAddress( ) );
 		System.out.println ("from Port: " + packet.getPort());
 
@@ -57,8 +58,8 @@ public class UDPReceiver extends Thread {
 	}
 	
 	//puts the message in the file and GUI
-	GUIBox.incomingTextBox.setText(message);
 	GUIBox.writeRecievedToFile(message);
+	GUIBox.incomingTextBox.setText(message);
 	
 	//puts sender and date in GUI
 	GUIBox.senderTextBox.setText(sender);
