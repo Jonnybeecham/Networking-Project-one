@@ -19,11 +19,12 @@ public class UDPReceiver extends Thread {
 	//override the run method with the given UPDReceiver code
     @Override
     public void run () {	
-	  try{
+	
+		try{
 		// Create a datagram socket, bound to the specific port 2000
 		DatagramSocket socket = new DatagramSocket(2000);
 
-		System.out.println ("Bound to local port " + socket.getLocalPort());
+		System.out.println ("Bound to local port " + socket.getLocalPort() );
 
 		// Create a datagram packet, containing a maximum buffer of 256 bytes
 		DatagramPacket packet = new DatagramPacket( new byte[256], 256 );
@@ -35,7 +36,7 @@ public class UDPReceiver extends Thread {
 		// Display packet information
 		InetAddress remote_addr = packet.getAddress();
 		sender = remote_addr.getHostAddress();
-		System.out.println ("Sender: " + remote_addr.getHostAddress( ) );
+		System.out.println ("Sender: " + sender );
 		System.out.println ("from Port: " + packet.getPort());
 
 		// Display packet contents, by reading from byte array
@@ -49,6 +50,7 @@ public class UDPReceiver extends Thread {
 				break;
 			else
 				System.out.print ( (char) data) ;
+				message += (char) data;
 		}
 			
 		socket.close( );
@@ -58,7 +60,7 @@ public class UDPReceiver extends Thread {
 	}
 	
 	//puts the message in the file and GUI
-	GUIBox.writeRecievedToFile(message);
+    GUIBox.writeRecievedToFile(message);
 	GUIBox.incomingTextBox.setText(message);
 	
 	//puts sender and date in GUI
